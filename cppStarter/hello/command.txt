@@ -1,0 +1,3 @@
+//This is command used to compile the C++ file
+gcc sourcefile_name.c -o outputfile.exe
+outputfile.exe
