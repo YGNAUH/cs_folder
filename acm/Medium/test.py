@@ -1,2 +1,4 @@
-dict = {0:1,1:2}
-print(len(dict))
+a = [1,2,3,4,5]
+print(a[0:5])
+
+
