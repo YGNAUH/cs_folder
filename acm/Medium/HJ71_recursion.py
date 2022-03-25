@@ -21,7 +21,7 @@ while 1:
     try:
         a = input().lower()
         b = input().lower()
-        
+        print(fun(a,b))
 
     except:
         break
