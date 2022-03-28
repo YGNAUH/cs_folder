@@ -56,4 +56,27 @@ print(regex_rec(s,p))
 '''
 
 def regex_dp(s, p):
-    
+    m, n = len(s) + 1, len(p) + 1
+    dp = [[False] * n for _ in range(m)]
+    dp[0][0] = True
+    for i in range(2, n, 2):
+        if dp[0][i-2] == 1 and p[i-1] == "*":
+            dp[0][i] = True                                          
+    for i in range(1,m):
+        for j in range(1,n):
+            if p[j-1] == "*":
+                if dp[i][j-2] == True:
+                    dp[i][j] = True
+                elif dp[i-1][j] == 1 and p[j-2] == s[i-1]:
+                    dp[i][j] = True
+                elif dp[i-1][j] == 1 and p[j-2] == ".":
+                    dp[i][j] = True
+            else:
+                if dp[i-1][j-1] == True and p[j-1] == s[i-1]:
+                    dp[i][j] = True
+                elif dp[i-1][j-1] == True and p[j-1] == ".":
+                    dp[i][j] = True
+    return dp[m-1][n-1]
+s = input()
+p = input()
+print(regex_dp(s,p))

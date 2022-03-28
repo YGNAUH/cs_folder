@@ -1,2 +1,0 @@
-"mississippi"
-"mis*is*p*."
