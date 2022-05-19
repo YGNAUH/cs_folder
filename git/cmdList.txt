@@ -2,4 +2,4 @@ git init
 git add .
 git commit -m "initial commit"
 git remote add origin [SSH]
-git push -u origin master
+git push -u origin main
