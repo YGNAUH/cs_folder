@@ -1,5 +1,6 @@
 """CS 61A Presents The Game of Hog."""
 
+from tkinter import E
 from dice import six_sided, four_sided, make_test_dice
 from ucb import main, trace, interact
 
@@ -22,7 +23,15 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    scores = []
     # END PROBLEM 1
+    for i in range(num_rolls):
+        scores.append(dice())
+    if scores.count(1) > 0:
+        return 1
+    else:
+        return sum(scores)
+       
 
 
 def free_bacon(score):
@@ -34,6 +43,12 @@ def free_bacon(score):
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
     # END PROBLEM 2
+    score = str(score)
+    if len(score) == 2:
+        bacon = 10 - int(score[1]) + int(score[0])
+    else:
+        bacon = 10 - int(score)
+    return bacon
 
 
 def take_turn(num_rolls, opponent_score, dice=six_sided):
@@ -52,7 +67,10 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
     # END PROBLEM 3
-
+    if num_rolls == 0:
+        return free_bacon(opponent_score)
+    else:
+        return roll_dice(num_rolls, dice)
 
 def is_swap(player_score, opponent_score):
     """
@@ -61,6 +79,16 @@ def is_swap(player_score, opponent_score):
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
     # END PROBLEM 4
+    player_score = str(player_score)
+    opponent_score = str(opponent_score)
+    if len(opponent_score) >= 2:
+        ten = int(opponent_score[-2])
+    else:
+        ten = 0
+    if abs(int(player_score[-1]) - int(opponent_score[-1])) == ten:
+        return True
+    else:
+        return False
 
 
 def other(who):
@@ -100,6 +128,31 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    current_score_0 = 0
+    current_score_1 = 0
+
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            turn0 = strategy0(score0, score1)
+            if feral_hogs and abs(current_score_0 - turn0) == 2:
+                score0 += 3
+            current_score_0 = take_turn(turn0, score1, dice)
+            score0 += current_score_0
+            if(is_swap(score0, score1)):
+                score0, score1 = score1, score0
+            who = other(who)
+        else:
+            turn1 = strategy1(score1, score0)
+            if feral_hogs and abs(current_score_1 - turn1) == 2:
+                score1 +=3
+            current_score_1 = take_turn(turn1,score0, dice)
+            score1 += current_score_1
+            if(is_swap(score1, score0)):
+                score0, score1 = score1, score0
+            who = other(who)
+
+
+    
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6

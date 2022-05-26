@@ -1,3 +1,6 @@
+from tkinter import Y
+
+
 def falling(n, k):
     """Compute the falling factorial of n to depth k.
 
@@ -11,7 +14,12 @@ def falling(n, k):
     1
     """
     "*** YOUR CODE HERE ***"
-
+    
+    res = 1
+    for i in range(k):
+        res *= n
+        n -= 1
+    return res
 
 
 def sum_digits(y):
@@ -28,6 +36,12 @@ def sum_digits(y):
     6
     """
     "*** YOUR CODE HERE ***"
+    y = str(y)
+    res = 0
+    for i in y:
+        res += int(i)
+    return res
+
 
 
 
@@ -47,5 +61,14 @@ def double_eights(n):
     False
     """
     "*** YOUR CODE HERE ***"
+    n = str(n)
+    if len(n) < 2:
+        return False
+    for i in range(len(n)-1):
+        if n[i:i+2] == "88":
+            return True
+        if i == len(n)-2:
+            return False
+        
 
 
