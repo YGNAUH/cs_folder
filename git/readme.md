@@ -1,5 +1,5 @@
 # GIT COMMAND MANUAL
-This is a git command summary, which is used in exercised on a really good [visible and interactive learning-git website ]  (https://learngitbranching.js.org/)
+This is a git command summary, which is used in exercised on a really good [visible and interactive learning-git website ](https://learngitbranching.js.org/)
 ## Main Here:
 1. git commit
 2. git branch your_branch_name
